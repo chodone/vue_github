@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <h1>회문검사기</h1>
+  <div id="app">
+
+    <input type="text" v-model="message">
+    <button @click = 'palindrome' >확인하기</button>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message:''
+      },
+      methods: {
+        palindrome: function (event) {
+          if(this.message === ''){
+            alert('입력값이 없습니다!')
+            return
+          }
+          for(let idx = 0; idx < this.message.length; idx++){
+
+
+            if (this.message[idx] !== this.message[this.message.length - idx -1]){
+              alert('회문이 아닙니다!')
+              return
+            }
+          }
+
+          alert('회문입니다!')
+          return
+        }
+      },   
+    })
+
+
+  </script>
+
+  
+</body>
+</html>
