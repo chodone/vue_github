@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <h1>Todo List</h1>
+    <select v-model="state">
+      <option value="all">전체</option>
+      <option value="in">진행중</option>
+      <option value="finish">완료</option>
+    </select>
+    <input type="text" v-model="content">
+    <button @click="addTodo">+</button>
+    <ul>
+      <li v-for="todo in todos" :key="todo.id">
+        <input type="checkbox" @click="toggleCompleted(todo)">
+        <span v-if="todo.isCompleted" style="text-decoration: line-through; color:gray;">{{todo.content}}</span>
+        <span v-else>{{todo.content}}</span>
+      </li>
+    </ul>
+    <button @click="deleteTodo">완료목록 삭제</button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        todos: JSON.parse(localStorage.getItem('todos')),
+        content: '',
+        state: ''
+      },
+      methods:{
+        addTodo: function() {
+          const newTodo = {
+            id: (new Date()).getTime() ,
+            content: '',
+            isCompleted: false,
+          }
+          newTodo.content = this.content
+          if (this.todos == null){
+            this.todos = []
+          }
+          this.todos.push(newTodo)
+          this.content = ''
+        },
+
+        toggleCompleted: function(todo) {
+          todo.isCompleted = !todo.isCompleted
+
+
+        },
+
+        deleteTodo: function() {
+          this.todos.forEach((element,index) => {
+            if(element.isCompleted){
+              this.todos.splice(index, 1)
+            }
+
+            
+          });
+
+        },
+  
+      },
+    watch: {
+      todos: {
+        deep: true,
+        handler: function() {
+          localStorage.setItem('todos', JSON.stringify(this.todos))
+        }
+      }
+    }  
+    })
+  </script>
+</body>
+</html>
