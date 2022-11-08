@@ -1,6 +1,6 @@
 <template>
   <div class="menu-list">
-    <h1>1. 음료를 고르세요.</h1>
+    <h2 style="margin:10px" >1. 음료를 고르세요.</h2>
     <!-- <p>{{ menuList }}</p> -->
     <MenuListItem v-for="menu in menuList" :key="menu.title" :menu="menu" />
 
@@ -26,5 +26,13 @@ export default {
 </script>
 
 <style>
+.menu-list{
+  margin: 10px;
+  width: 600px;
+  background-color: white;
+  border-radius: 10px;
+
+}
+
 
 </style>

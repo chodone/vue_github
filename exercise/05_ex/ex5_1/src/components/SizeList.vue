@@ -1,20 +1,34 @@
 <template>
-  <div>
-    <h1>2. 사이즈를 고르세요.</h1>
+  <div class="size-list">
+    <h2 style="margin:10px">2. 사이즈를 고르세요.</h2>
+    <SizeListItem v-for="size in sizeList" :key="size.name" :size="size"/>
   </div>
 </template>
 
 <script>
+import SizeListItem from '@/components/SizeListItem'
 export default {
   name: 'SizeList',
+  components: {
+    SizeListItem
+  },
   methods: {
     onSelectMenu: function () {},
   },
   computed: {
-    sizeList: function () {},
+    sizeList: function () {
+      return this.$store.state.sizeList
+    },
   },
 }
 </script>
 
 <style>
+.size-list {
+  margin: 10px;
+  width: 600px;
+  background-color: white;
+  border-radius: 10px;
+
+}
 </style>
