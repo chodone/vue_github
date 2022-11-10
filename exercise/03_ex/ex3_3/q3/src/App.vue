@@ -2,12 +2,13 @@
   <div id="app">
     <nav>
       <h1>캐릭터 진화 단계 가이드</h1>
-      <div id="btn-box">
-        <div id="home-btn">Home</div>
-        <div id="start-btn">Start</div>
-      </div>
+      <br>
+      <br>
+      <router-link id='btn-box' :to="{ name: 'home'}">Home</router-link>
+      <router-link id='btn-box' :to="{ name: 'NoColor'}">start</router-link>
+      
     </nav>
-    <h2>Start 버튼으로 시작해 보세요!</h2>
+    <router-view/>
   </div>
 </template>
 
@@ -18,6 +19,7 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  
 }
 
 nav {
@@ -34,18 +36,34 @@ nav a.router-link-exact-active {
 }
 
 #btn-box {
-  display: flex;
-  justify-content: center;
+  border: solid  #F1A324 2px;
+  margin: 0px 20px ;
+  padding: 20px 35px;
 }
 
-#home-btn{
-  margin: 20px;
-  padding: 30px;
-  border: solid orange;
+#box1 {
+  margin: 0px 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px;
+    
 }
-#start-btn{
-  margin: 20px;
-  padding: 20px;
-  border: solid orange;
+
+#btn{
+  border: solid #F1A324;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 16px;
+
 }
+
+#char-img{
+  width: 300px;
+  height: 300px;
+}
+
+
+ 
 </style>
