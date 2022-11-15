@@ -19,6 +19,7 @@
 import axios from 'axios'
 
 const API_URL = 'http://127.0.0.1:8000/todos/'
+const token = localStorage.getItem('jwt_accessToken')
 
 export default {
   name: 'TodoList',
@@ -29,9 +30,13 @@ export default {
   },
   methods: {
     getTodos: function () {
+      console.log(token)
       axios({
         method: 'get',
         url: 'http://127.0.0.1:8000/todos/',
+         headers:{
+          Authorization: `Bearer ${token}`
+        }
       })
         .then(res => {
           console.log(res)
@@ -44,7 +49,10 @@ export default {
     deleteTodo: function (todo) {
       axios({
         method: 'DELETE',
-        url: `${API_URL}${todo.id}/`
+        url: `${API_URL}${todo.id}/`,
+        headers:{
+          Authorization: `Bearer ${token}`
+        }
       })
         .then(() => {
           this.getTodos()
@@ -57,17 +65,28 @@ export default {
         method: 'PUT',
         url: `${API_URL}${todo.id}/`,
         data:{
+          id: todo.id,
           title: todo.title,
-          is_completed: is_completed
+          is_completed: is_completed,
+          user: todo.user
+        },
+        headers:{
+          Authorization: `Bearer ${token}`
         }
       })
         .then(() => {
           this.getTodos()
 
         })
+        .catch((error) => {
+          console.log(error)
+        })
       
     },
   },
+  created() {
+    this.getTodos()
+  }
 }
 </script>
 

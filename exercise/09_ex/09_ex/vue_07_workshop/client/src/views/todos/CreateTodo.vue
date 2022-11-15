@@ -11,6 +11,7 @@
 
 <script>
 import axios from'axios'
+const token = localStorage.getItem('jwt_accessToken')
 
 const API_URL = 'http://127.0.0.1:8000'
 
@@ -22,13 +23,18 @@ export default {
     }
   },
   methods: {
+    
     createTodo: function () {
       axios({
         method: 'post',
         url: `${API_URL}/todos/`,
         data:{
           title: this.title,
-          is_completed: false
+          is_completed: false,
+          user: localStorage.getItem('user-pk')
+        },
+        headers:{
+          Authorization: `Bearer ${token}`
         }
       })
         .then((res) => {
